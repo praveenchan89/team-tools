@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Package, Database, AlertCircle, CheckCircle, Info, Home, Menu, X, Upload, Download, Search, Clock, Calendar, XCircle } from 'lucide-react';
+import { FileText, Package, Database, AlertCircle, CheckCircle, Info, Home, Menu, X, Upload, Download, Clock, Calendar, XCircle } from 'lucide-react';
 
 const TraceLinkSupportApp = () => {
   const [activeApp, setActiveApp] = useState('home');
@@ -9,7 +9,7 @@ const TraceLinkSupportApp = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [validationResult, setValidationResult] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [serialNumberData, setSerialNumberData] = useState([]);
+ // const [serialNumberData, setSerialNumberData] = useState([]);
 
   // Sub-applications configuration
   const subApps = [
@@ -50,7 +50,7 @@ const TraceLinkSupportApp = () => {
       
       allEvents.forEach(event => {
         const eventTime = event.eventTime;
-        const action = event.action;
+      //  const action = event.action;
         const epcs = event.epcList || [];
         
         // Determine event type based on action and business step
