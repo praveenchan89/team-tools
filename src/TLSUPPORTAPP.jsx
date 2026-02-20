@@ -9,7 +9,7 @@ const TraceLinkSupportApp = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [validationResult, setValidationResult] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
- // const [serialNumberData, setSerialNumberData] = useState([]);
+  const [serialNumberData, setSerialNumberData] = useState([]);
 
   // Sub-applications configuration
   const subApps = [
@@ -50,7 +50,7 @@ const TraceLinkSupportApp = () => {
       
       allEvents.forEach(event => {
         const eventTime = event.eventTime;
-      //  const action = event.action;
+        const action = event.action;
         const epcs = event.epcList || [];
         
         // Determine event type based on action and business step
@@ -103,7 +103,7 @@ const TraceLinkSupportApp = () => {
       // Process Object Events
       objectEvents.forEach(event => {
         const eventTime = event.querySelector('eventTime')?.textContent;
-        const action = event.querySelector('action')?.textContent;
+      //  const action = event.querySelector('action')?.textContent;
         const bizStep = event.querySelector('bizStep')?.textContent || '';
         const epcList = event.querySelectorAll('epc');
         
