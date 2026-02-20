@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Package, Database, AlertCircle, CheckCircle, Info, Home, Menu, X, Upload, Download, Search, Clock, Calendar, XCircle } from 'lucide-react';
+import { FileText, Package, Database, AlertCircle, CheckCircle, Info, Home, Menu, X, Upload, Download, Clock, Calendar, XCircle } from 'lucide-react';
 
 const TraceLinkSupportApp = () => {
   const [activeApp, setActiveApp] = useState('home');
@@ -102,7 +102,6 @@ const TraceLinkSupportApp = () => {
       // Process Object Events
       objectEvents.forEach(event => {
         const eventTime = event.querySelector('eventTime')?.textContent;
-        const action = event.querySelector('action')?.textContent;
         const bizStep = event.querySelector('bizStep')?.textContent || '';
         const epcList = event.querySelectorAll('epc');
         
