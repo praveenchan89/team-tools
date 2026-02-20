@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Package, Database, AlertCircle, CheckCircle, Info, Home, Menu, X, Upload, Download, Clock, Calendar, XCircle } from 'lucide-react';
+import { FileText, Package, Database, AlertCircle, CheckCircle, Info, Home, Menu, X, Upload, Download, Search, Clock, Calendar, XCircle } from 'lucide-react';
 
 const TraceLinkSupportApp = () => {
   const [activeApp, setActiveApp] = useState('home');
@@ -9,7 +9,6 @@ const TraceLinkSupportApp = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [validationResult, setValidationResult] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [serialNumberData, setSerialNumberData] = useState([]);
 
   // Sub-applications configuration
   const subApps = [
@@ -50,16 +49,16 @@ const TraceLinkSupportApp = () => {
       
       allEvents.forEach(event => {
         const eventTime = event.eventTime;
-        const action = event.action;
+        const eventAction = event.action;
         const epcs = event.epcList || [];
         
         // Determine event type based on action and business step
         let eventType = 'Unknown';
         const bizStep = event.bizStep || '';
         
-        if (bizStep.includes('commissioning') || action === 'ADD') {
+        if (bizStep.includes('commissioning') || eventAction === 'ADD') {
           eventType = 'Commission';
-        } else if (eventType === 'AggregationEvent' || bizStep.includes('packing')) {
+        } else if (event.eventType === 'AggregationEvent' || bizStep.includes('packing')) {
           eventType = 'Aggregation';
         } else if (bizStep.includes('shipping') || bizStep.includes('departing')) {
           eventType = 'Shipment';
@@ -103,7 +102,7 @@ const TraceLinkSupportApp = () => {
       // Process Object Events
       objectEvents.forEach(event => {
         const eventTime = event.querySelector('eventTime')?.textContent;
-      //  const action = event.querySelector('action')?.textContent;
+        const action = event.querySelector('action')?.textContent;
         const bizStep = event.querySelector('bizStep')?.textContent || '';
         const epcList = event.querySelectorAll('epc');
         
@@ -290,7 +289,6 @@ const TraceLinkSupportApp = () => {
     setUploadedFile(file);
     setIsProcessing(true);
     setValidationResult(null);
-    setSerialNumberData([]);
     
     try {
       const content = await file.text();
@@ -298,7 +296,6 @@ const TraceLinkSupportApp = () => {
       const organizedData = organizeEventsBySerial(events);
       const validation = validateTimestamps(organizedData);
       
-      setSerialNumberData(organizedData);
       setValidationResult(validation);
     } catch (error) {
       setValidationResult({
